@@ -1,7 +1,7 @@
-#include <stdio.h> //biblioteca de comunicaÁ„o com o usu·rio
-#include <stdlib.h> //biblioteca de alocaÁ„o de espaÁo em memÛria
-#include <locale.h> //biblioteca de alocaÁıes de texto por regi„o
-#include <string.h> //biblioteca respons·vel por cuidar das string
+#include <stdio.h> //biblioteca de comunica√ß√£o com o usu√°rio
+#include <stdlib.h> //biblioteca de aloca√ß√£o de espa√ßo em mem√≥ria
+#include <locale.h> //biblioteca de aloca√ß√µes de texto por regi√£o
+#include <string.h> //biblioteca respons√°vel por cuidar das string
 
 int registro() {
     char arquivo[40];
@@ -12,11 +12,11 @@ int registro() {
 
     printf("Digite o CPF a ser cadastrado: ");
     scanf("%s", cpf);
-    strcpy(arquivo, cpf); //Respons·vel por copiar os valores das string
+    strcpy(arquivo, cpf); //Respons√°vel por copiar os valores das string
 
     FILE *file; // cria o arquivo
     file = fopen(arquivo, "w"); // cria o arquivo
-    fprintf(file, "%s;", cpf); // salvo o valor da vari·vel
+    fprintf(file, "%s;", cpf); // salvo o valor da vari√°vel
     fclose(file); // fecha o arquivo
 
     printf("Digite o nome a ser cadastrado: ");
@@ -51,10 +51,10 @@ int consulta() {
     file = fopen(cpf, "r");
 
     if (file == NULL) {
-        printf("N„o foi possÌvel abrir o arquivo, n„o localizado.\n");
+        printf("N√£o foi poss√≠vel abrir o arquivo, n√£o localizado.\n");
     } else {
         while (fgets(conteudo, 200, file) != NULL) {
-            printf("Essas s„o as informaÁıes do usu·rio: ");
+            printf("Essas s√£o as informa√ß√µes do usu√°rio: ");
             printf("%s\n", conteudo);
         }
         system("pause");
@@ -64,7 +64,7 @@ int consulta() {
 }
 
 int deletar() {
-    printf("VocÍ escolheu deletar nomes!\n");
+    printf("Voc√™ escolheu deletar nomes!\n");
     system("pause");
     return 0;
 }
@@ -75,12 +75,13 @@ int main() {
 
     while (laco) {
         system("cls");
-        printf("### CartÛrio da EBAC ###\n");
-        printf("Escolha a opÁ„o desejada do menu\n\n");
+        printf("### Cart√≥rio da EBAC ###\n");
+        printf("Escolha a op√ß√£o desejada do menu\n\n");
         printf("1 - Registrar nomes\n");
         printf("2 - Consultar nomes\n");
-        printf("3 - Deletar nomes\n\n");
-        printf("OpÁ„o: ");
+        printf("3 - Deletar nomes\n");
+        printf("4 - Sair\n\n");
+        printf("Op√ß√£o: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -93,11 +94,14 @@ int main() {
             case 3:
                 deletar();
                 break;
+            case 4:
+                laco = 0; // Encerra o loop
+                printf("Saindo do sistema...\n");
+                break;
             default:
-                printf("OpÁ„o inv·lida. Tente novamente.\n");
+                printf("Op√ß√£o inv√°lida. Tente novamente.\n");
         }
     }
 
     return 0;
 }
-

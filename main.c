@@ -1,7 +1,7 @@
-#include <stdio.h> //biblioteca de comunica√ß√£o com o usu√°rio
-#include <stdlib.h> //biblioteca de aloca√ß√£o de espa√ßo em mem√≥ria
-#include <locale.h> //biblioteca de aloca√ß√µes de texto por regi√£o
-#include <string.h> //biblioteca respons√°vel por cuidar das string
+#include <stdio.h> //biblioteca de comunicaÁ„o com o usu·rio
+#include <stdlib.h> //biblioteca de alocaÁ„o de espaÁo em memÛria
+#include <locale.h> //biblioteca de alocaÁıes de texto por regi„o
+#include <string.h> //biblioteca respons·vel por cuidar das string
 
 int registro() {
     char arquivo[40];
@@ -12,11 +12,11 @@ int registro() {
 
     printf("Digite o CPF a ser cadastrado: ");
     scanf("%s", cpf);
-    strcpy(arquivo, cpf); //Respons√°vel por copiar os valores das string
+    strcpy(arquivo, cpf); //Respons·vel por copiar os valores das string
 
     FILE *file; // cria o arquivo
     file = fopen(arquivo, "w"); // cria o arquivo
-    fprintf(file, "%s;", cpf); // salvo o valor da vari√°vel
+    fprintf(file, "%s;", cpf); // salvo o valor da vari·vel
     fclose(file); // fecha o arquivo
 
     printf("Digite o nome a ser cadastrado: ");
@@ -51,10 +51,10 @@ int consulta() {
     file = fopen(cpf, "r");
 
     if (file == NULL) {
-        printf("N√£o foi poss√≠vel abrir o arquivo, n√£o localizado.\n");
+        printf("N„o foi possÌvel abrir o arquivo, n„o localizado.\n");
     } else {
         while (fgets(conteudo, 200, file) != NULL) {
-            printf("Essas s√£o as informa√ß√µes do usu√°rio: ");
+            printf("Essas s„o as informaÁıes do usu·rio: ");
             printf("%s\n", conteudo);
         }
         system("pause");
@@ -64,44 +64,63 @@ int consulta() {
 }
 
 int deletar() {
-    printf("Voc√™ escolheu deletar nomes!\n");
+    printf("VocÍ escolheu deletar nomes!\n");
     system("pause");
     return 0;
 }
 
+void sair() {
+    printf("Saindo do sistema...\n");
+    system("pause");
+}
+
 int main() {
     int opcao = 0, laco = 1;
+    char senhadigitada[10] = "a"; // inicializa a senha digitada
+    char senha[10] = "admin"; // senha correta
+
     setlocale(LC_ALL, "Portuguese");
 
-    while (laco) {
-        system("cls");
-        printf("### Cart√≥rio da EBAC ###\n");
-        printf("Escolha a op√ß√£o desejada do menu\n\n");
-        printf("1 - Registrar nomes\n");
-        printf("2 - Consultar nomes\n");
-        printf("3 - Deletar nomes\n");
-        printf("4 - Sair\n\n");
-        printf("Op√ß√£o: ");
-        scanf("%d", &opcao);
+    printf("### CartÛrio da EBAC ###\n");
+    printf("Login de administrador\n\nDigite a sua senha: ");
+    scanf("%s", senhadigitada);
 
-        switch (opcao) {
-            case 1:
-                registro();
-                break;
-            case 2:
-                consulta();
-                break;
-            case 3:
-                deletar();
-                break;
-            case 4:
-                laco = 0; // Encerra o loop
-                printf("Saindo do sistema...\n");
-                break;
-            default:
-                printf("Op√ß√£o inv√°lida. Tente novamente.\n");
+    if(senhadigitada[0] == 'a' && strcmp(senhadigitada, senha) == 0) {
+        for (laco = 1; laco == 1;) {
+            system("cls");
+            printf("### CartÛrio da EBAC ###\n");
+            printf("Escolha a opÁ„o desejada do menu\n\n");
+            printf("\t1 - Registrar nomes\n");
+            printf("\t2 - Consultar nomes\n");
+            printf("\t3 - Deletar nomes\n");
+            printf("\t4 - Sair\n\n");
+            printf("OpÁ„o: ");
+            scanf("%d", &opcao);
+
+            switch (opcao) {
+                case 1:
+                    registro();
+                    break;
+                case 2:
+                    consulta();
+                    break;
+                case 3:
+                    deletar();
+                    break;
+                case 4:
+                    sair();
+                    laco = 0; // Encerra o loop
+                    break;
+                default:
+                    printf("Essa opÁ„o n„o est· disponÌvel!\n");
+                    system("pause");
+                    break;
+            }
         }
+    } else {
+        printf("Senha incorreta\n");
     }
 
     return 0;
 }
+
